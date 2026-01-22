@@ -2,6 +2,8 @@
 
 ✨ A delightful CLI tool that brings a touch of wisdom and whimsy to your terminal with random fortunes.
 
+*Licensed under the MIT License*
+
 ## Quick Start
 
 ### Install
@@ -45,3 +47,9 @@ make clipboard  # Copy current fortune to clipboard
 ## For Developers
 
 See [SETUP.md](SETUP.md) for development setup, testing, and technical details.
+
+## License
+
+Copyright (c) 2025 David Goldfarb (deg@degel.com)
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
