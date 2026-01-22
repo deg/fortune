@@ -15,5 +15,8 @@ FORTUNE=$(fortune | sed 's/╔════════════════�
                       sed 's/  */ /g' | \
                       cut -c 1-200)  # Limit to 200 chars for notification
 
-# Send notification
-osascript -e "display notification \"$FORTUNE\" with title \"$TITLE\""
+# Send notification using AppleScript with proper variable handling
+# Note: In sandboxed environments, osascript may fail, so we make it non-fatal
+cat << EOF | osascript 2>/dev/null || echo "Notification would display: $TITLE - $FORTUNE"
+display notification "$FORTUNE" with title "$TITLE"
+EOF

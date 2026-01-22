@@ -24,7 +24,7 @@ fi
 
 case "$NOTIFICATION_TYPE" in
     "notification")
-        ./fortune_notification.sh
+        ./scripts/fortune_notification.sh
         ;;
     "terminal")
         # Only show if terminal is active
