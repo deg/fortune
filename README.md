@@ -10,6 +10,18 @@ This project uses [uv](https://github.com/astral-sh/uv) for dependency managemen
 
 ### Installation
 
+#### Option 1: Global Installation (Recommended)
+
+Install the fortune command globally for system-wide access:
+
+```bash
+uv tool install --editable .
+```
+
+This makes `fortune` available from anywhere in your terminal.
+
+#### Option 2: Local Development
+
 Use the Makefile to install dependencies and set up the virtual environment:
 
 ```bash
@@ -18,15 +30,17 @@ make install
 
 ### Usage
 
-Run the CLI tool using `uv run`:
+Once installed globally, simply run:
+
+```bash
+fortune
+```
+
+For local development, you can also use:
 
 ```bash
 make run
-```
-
-Or run it directly via `uv`:
-
-```bash
+# or
 uv run fortune
 ```
 
