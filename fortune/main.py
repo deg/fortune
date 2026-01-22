@@ -4,6 +4,7 @@ from pathlib import Path
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
+from rich.box import DOUBLE
 
 def get_fortunes():
     """Reads fortunes from the data directory."""
@@ -48,13 +49,15 @@ def main():
     selected_fortune = random.choice(fortunes)
 
     # Create a styled fortune panel
-    fortune_text = Text(selected_fortune, style="yellow")
+    fortune_text = Text(selected_fortune, style="bold yellow", justify="center")
     panel = Panel(
         fortune_text,
-        title="[bold blue]🪄 Fortune[/bold blue]",
-        border_style="blue",
-        padding=(1, 2),
-        title_align="center"
+        title="[bold magenta]🪄 Fortune Cookie[/bold magenta]",
+        title_align="center",
+        border_style="bold cyan",
+        box=DOUBLE,
+        width=80,
+        padding=(1, 3)
     )
 
     console.print(panel)
