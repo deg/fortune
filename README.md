@@ -44,6 +44,34 @@ make run
 uv run fortune
 ```
 
+## Integration Options
+
+Modern fortune delivery for macOS workflows:
+
+### 🖥️ Terminal Startup
+Smart integration that shows fortunes occasionally (not every shell):
+```bash
+./setup_integrations.sh  # Adds to ~/.zshrc with intelligent timing
+```
+
+### 🔔 Desktop Notifications
+Periodic fortune notifications during active hours:
+```bash
+./fortune_notification.sh  # Send immediate notification
+./setup_integrations.sh    # Set up cron job (every 3 hours)
+```
+
+### 📋 Productivity Integration
+Copy fortunes to clipboard for sharing:
+```bash
+./fortune_clipboard.sh  # Copy fortune to clipboard
+```
+
+### ⚙️ Custom Integration
+- **Cron Jobs**: `./fortune_cron.sh notification` or `./fortune_cron.sh terminal`
+- **Quiet Hours**: Automatically respects 10 PM - 8 AM
+- **Activity Detection**: Only shows when you've been active recently
+
 ## Makefile Commands
 
 - `make install`: Sets up the project and syncs dependencies.
