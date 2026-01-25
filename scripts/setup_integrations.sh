@@ -28,25 +28,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     fi
 fi
 
-# 2. Cron job setup
+# 2. Quick test
 echo
-echo "2. Cron Job Setup"
-echo "This will show fortunes periodically via notifications"
-read -p "Set up cron job for fortunes every 3 hours? (y/N): " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    CRON_JOB="0 */3 * * * \"$FORTUNE_DIR/fortune_cron.sh\" notification"
-    if ! crontab -l 2>/dev/null | grep -q "fortune_cron.sh"; then
-        (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
-        echo "✅ Added cron job (runs every 3 hours during active hours)"
-    else
-        echo "⚠️  Cron job already exists"
-    fi
-fi
-
-# 3. Quick test
-echo
-echo "3. Testing Integration"
+echo "2. Testing Integration"
 echo "Testing fortune command..."
 fortune >/dev/null 2>&1
 if [[ $? -eq 0 ]]; then
@@ -70,11 +54,8 @@ echo
 echo "Available commands:"
 echo "  fortune                    - Manual fortune display"
 echo "  ./fortune_notification.sh  - Send desktop notification"
-echo "  ./fortune_cron.sh          - Manual cron trigger"
+echo "  ./fortune_clipboard.sh     - Copy fortune to clipboard"
 echo
 echo "Integration points:"
 echo "  - Terminal startup (smart timing)"
-echo "  - Cron jobs (periodic notifications)"
 echo "  - Manual usage anytime"
-echo
-echo "To remove cron job: crontab -e"

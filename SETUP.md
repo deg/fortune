@@ -37,10 +37,9 @@ Unit tests covering:
 ### Shell Script Tests
 Shell script tests using [Bats](https://github.com/bats-core/bats-core) covering:
 - `fortune_clipboard.sh`: Clipboard functionality and text cleaning
-- `fortune_cron.sh`: Cron job logic, quiet hours, and activity detection
 - `fortune_notification.sh`: Desktop notifications with character limits and fallbacks
 - `fortune_terminal_startup.sh`: Smart timing with probability and interval checks
-- `setup_integrations.sh`: Interactive setup with zshrc and cron job configuration
+- `setup_integrations.sh`: Interactive setup with zshrc configuration
 
 ### Running Tests
 

@@ -1,5 +1,3 @@
-.PHONY: help install run build clean test test-python test-shell test-all test-cov data setup notify clipboard cron-test
-
 # Default shell
 SHELL := /bin/bash
 
@@ -74,18 +72,13 @@ test: test-python test-shell
 test-cov:
 	uv run python -m pytest --cov=fortune --cov-report=term-missing
 
-# Test cron fortune delivery (scripts/ directory)
-.PHONY: test-cron
-test-cron:
-	./scripts/fortune_cron.sh notification test
-
 # Download fortune data files from BSD fortune program
 data:
 	mkdir -p fortune/data
 	curl -o fortune/data/fortunes https://cdn.openbsd.org/pub/OpenBSD/src/share/games/fortune/fortune/fortunes
 	curl -o fortune/data/fortunes2 https://cdn.openbsd.org/pub/OpenBSD/src/share/games/fortune/fortune/fortunes2
 
-# Set up fortune integrations (terminal, cron, etc.)
+# Set up fortune integrations (terminal startup, etc.)
 .PHONY: setup
 setup:
 	./scripts/setup_integrations.sh

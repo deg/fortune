@@ -158,3 +158,4 @@ uv.lock
 
 # Beads export state (should not be in version control)
 .beads/export-state/
+

@@ -11,7 +11,7 @@ setup() {
     cp scripts/setup_integrations.sh "$SCRIPT_DIR/"
 
     # Create test versions of the scripts
-    for script in fortune_clipboard.sh fortune_cron.sh fortune_notification.sh fortune_terminal_startup.sh; do
+    for script in fortune_clipboard.sh fortune_notification.sh fortune_terminal_startup.sh; do
         echo "#!/bin/bash" > "$SCRIPT_DIR/$script"
         echo "echo '$script executed'" >> "$SCRIPT_DIR/$script"
         chmod +x "$SCRIPT_DIR/$script"
@@ -40,7 +40,7 @@ EOF
     chmod +x "$SCRIPT_DIR/osascript"
 
     # Run with input that answers 'n' to all prompts
-    run bash -c "echo -e 'n\nn' | ./setup_integrations.sh"
+    run bash -c "echo -e 'n' | ./setup_integrations.sh"
 
     # The script may exit with non-zero status due to interactive nature
     # but it should produce output

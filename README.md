@@ -27,10 +27,9 @@ make setup  # Adds to ~/.zshrc (shows occasionally, not every shell)
 ```
 
 ### 🔔 Desktop Notifications
-Receive periodic fortune notifications during your workday:
+Send fortune notifications manually:
 ```bash
 make notify    # Send immediate notification
-make setup     # Set up cron job (every 3 hours, 10 AM - 11 PM)
 ```
 
 ### 📋 Clipboard Magic
@@ -40,9 +39,7 @@ make clipboard  # Copy current fortune to clipboard
 ```
 
 ### ⚙️ Smart Behavior
-- **Quiet Hours**: Automatically respects 11 PM - 10 AM
-- **Activity Detection**: Only shows when you've been active
-- **Intelligent Timing**: Not every shell session, just occasionally
+- **Intelligent Timing**: Terminal startup shows fortunes occasionally, not every shell session
 
 ## For Developers
 
