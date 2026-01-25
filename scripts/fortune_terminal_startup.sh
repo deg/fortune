@@ -4,9 +4,9 @@
 # Shows fortune only occasionally to avoid being annoying
 
 # Configuration
-FORTUNE_CHANCE=0.3  # 30% chance to show fortune
+FORTUNE_CHANCE=0.99  # 99% chance to show fortune (until I get too annoyed)
 LAST_FORTUNE_FILE="$HOME/.last_fortune_time"
-MIN_INTERVAL_MINUTES=60  # Don't show more often than once per hour
+MIN_INTERVAL_MINUTES=3  # Don't show constantly
 
 # Check if we should show a fortune
 show_fortune() {
