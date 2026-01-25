@@ -3,38 +3,59 @@
 # Default shell
 SHELL := /bin/bash
 
+.PHONY: help
 help:
-	@echo "Available commands:"
-	@echo "  make install    - Install dependencies and project in editable mode"
-	@echo "  make run        - Run the fortune CLI"
-	@echo "  make build      - Build the project"
-	@echo "  make clean      - Remove build artifacts and virtual environment"
-	@echo "  make test       - Run Python tests"
-	@echo "  make test-shell - Run shell script tests (requires: brew install bats-core)"
-	@echo "  make test-all   - Run all tests (Python + shell scripts)"
-	@echo "  make test-cov   - Run Python tests with coverage report"
-	@echo "  make data       - Download fortune data files"
-	@echo "  make setup      - Set up fortune integrations (terminal, cron, etc.)"
-	@echo "  make notify     - Send fortune as desktop notification"
-	@echo "  make clipboard  - Copy fortune to clipboard"
-	@echo "  make cron-test  - Test cron fortune delivery (scripts/ directory)"
+	@echo -e "\033[1;34mUsage:\033[0m make [target]"
+	@echo ""
+	@echo -e "\033[1;36mTargets:\033[0m"
+	@awk '/^[a-zA-Z\-\_0-9]+:/ { \
+	    helpMessage = match(lastComment, /^# (.*)/); \
+	    helpCommand = $$1; sub(/:$$/, "", helpCommand); \
+	    if (helpMessage) { \
+	        printf "  \033[1;32m%-20s\033[0m \033[0;37m%s\033[0m\n", helpCommand, substr(lastComment, RSTART + 2, RLENGTH - 2); \
+	    } else { \
+	        printf "  \033[1;32m%-20s\033[0m \033[0;33m??? [No description]\033[0m\n", helpCommand; \
+	    } \
+	    lastComment = ""; \
+	} \
+	/^# / { \
+	    lastComment = $$0; \
+	} \
+	/^\.PHONY:/ { \
+	    next; \
+	}' $(MAKEFILE_LIST) | sort
+	@echo ""
 
+
+
+# Install dependencies and project in editable mode
+.PHONY: install
 install:
 	uv sync --extra dev
 
+# Run the fortune CLI
+.PHONY: run
 run:
 	uv run fortune
 
+# Build the project
+.PHONY: build
 build:
 	uv build
 
+# Remove build artifacts and virtual environment
+.PHONY: clean
 clean:
 	rm -rf dist .venv .uv
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 
+# Run Python tests
+.PHONY: test-python
 test-python:
 	uv run python -m pytest
 
+# Run shell script tests (requires: brew install bats-core)
+.PHONY: test-shell
 test-shell:
 	@if command -v bats >/dev/null 2>&1; then \
 		bats tests/shell/; \
@@ -43,27 +64,45 @@ test-shell:
 		exit 1; \
 	fi
 
+# Run all tests (Python + shell scripts)
+.PHONY: test
 test: test-python test-shell
 
+
+# Run Python tests with coverage report
+.PHONY: test-cov
 test-cov:
 	uv run python -m pytest --cov=fortune --cov-report=term-missing
 
-# Download fortune data files from the BSD fortune program
-# Source: OpenBSD fortune game source code
-# https://cvsweb.openbsd.org/cgi-bin/cvsweb/src/games/fortune/fortune/
+# Test cron fortune delivery (scripts/ directory)
+.PHONY: test-cron
+test-cron:
+	./scripts/fortune_cron.sh notification test
+
+# Download fortune data files from BSD fortune program
 data:
 	mkdir -p fortune/data
 	curl -o fortune/data/fortunes https://cdn.openbsd.org/pub/OpenBSD/src/share/games/fortune/fortune/fortunes
 	curl -o fortune/data/fortunes2 https://cdn.openbsd.org/pub/OpenBSD/src/share/games/fortune/fortune/fortunes2
 
+# Set up fortune integrations (terminal, cron, etc.)
+.PHONY: setup
 setup:
 	./scripts/setup_integrations.sh
 
+# Send fortune as desktop notification
+.PHONY: notify
 notify:
 	./scripts/fortune_notification.sh
 
+# Copy fortune to clipboard
+.PHONY: clipboard
 clipboard:
 	./scripts/fortune_clipboard.sh
 
-cron-test:
-	./scripts/fortune_cron.sh notification test
+
+
+
+
+
+
