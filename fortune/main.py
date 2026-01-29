@@ -49,14 +49,14 @@ def main():
     selected_fortune = random.choice(fortunes)
 
     # Create a styled fortune panel
-    fortune_text = Text(selected_fortune, style="bold yellow", justify="center")
+    fortune_text = Text(selected_fortune, style="bold yellow", justify="left")
     panel = Panel(
         fortune_text,
         title="[bold magenta]🪄 Fortune Cookie[/bold magenta]",
         title_align="center",
         border_style="bold cyan",
         box=DOUBLE,
-        width=80,
+        width=84,
         padding=(1, 3)
     )
 
