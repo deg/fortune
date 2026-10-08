@@ -161,3 +161,10 @@ uv.lock
 # Beads export state (should not be in version control)
 .beads/export-state/
 
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+*.gate.lock*
